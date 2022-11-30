@@ -17,42 +17,36 @@ form {
     display: grid;
 }
 form > * {
- margin: 0px 10px;
+    margin: 0px 10px;
 }
 form > label {
-margin-top: 20px;
-
+    margin-top: 20px;
 }
 form > input {
- text-indent: 6px;
+    text-indent: 6px;
 }
 form > button {
-
- 
-margin-top: 20px; 
- height: 40px;
+    margin-top: 20px;
+    height: 40px;
 }
 
-
-
 input:invalid {
-  border-color: #900;
-  background-color: #fdd;
+    border-color: #900;
+    background-color: #fdd;
 }
 
 input:focus:invalid {
-  outline: none;
+    outline: none;
 }
 .error {
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
 
-  font-size: 80%;
-  color: white;
-  background-color: #900;
-  border-radius: 0 0 5px 5px;
-
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .error.active {
-  padding: 0.3em;
+    padding: 0.3em;
 }

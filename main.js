@@ -1,7 +1,7 @@
 const labelCreator = (name, text) => {
     const label = document.createElement("label");
     label.for = name;
-    label.innerHTML = text;
+    label.innerHTML = `${text} <span style="color:red;">*</span>`;
     return label;
 };
 const inputCreator = (name, type, placeholder, required, min, max) => {
@@ -69,25 +69,31 @@ const renderForm = () => {
 document.body.appendChild(renderForm());
 
 const form = document.querySelector("form");
-const emailI = document.getElementById("email");
+const emailInput = document.getElementById("email");
 const emailError = document.querySelector("#email + span.error");
-const countryI = document.getElementById("country");
+const countryInput = document.getElementById("country");
 const countryError = document.querySelector("#country + span.error");
-const zipcodeI = document.getElementById("zipcode");
+const zipcodeInput = document.getElementById("zipcode");
 const zipcodeError = document.querySelector("#zipcode + span.error");
-const passwordI = document.getElementById("password");
+const passwordInput = document.getElementById("password");
 const passwordError = document.querySelector("#password + span.error");
-const passwordConfirmI = document.getElementById("confirmPassword");
-const passwordConfirmError = document.querySelector(
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const confirmPasswordError = document.querySelector(
     "#confirmPassword + span.error"
 );
-const formContents = [emailI, countryI, zipcodeI, passwordI, passwordConfirmI];
+const formContents = [
+    emailInput,
+    countryInput,
+    zipcodeInput,
+    passwordInput,
+    confirmPasswordInput,
+];
 const formErrorContents = [
     emailError,
     countryError,
     zipcodeError,
     passwordError,
-    passwordConfirmError,
+    confirmPasswordError,
 ];
 for (let i = 0; i < formContents.length; i += 1) {
     formContents[i].addEventListener("input", (e) => {
@@ -110,47 +116,53 @@ form.addEventListener("submit", (event) => {
 });
 
 const showError = (input) => {
-    if (input === emailI) {
-        if (emailI.validity.valueMissing) {
+    if (input === emailInput) {
+        if (emailInput.validity.valueMissing) {
             emailError.textContent = "You need to enter e-mail address.";
-        } else if (emailI.validity.typeMismatch) {
+        } else if (emailInput.validity.typeMismatch) {
             emailError.textContent =
                 "Entered value needs to be an e-mail address.";
-        } else if (emailI.validity.tooShort) {
-            emailError.textContent = `Email should be at least ${emailError.minLength} characters; you entered ${emailI.value.length}.`;
+        } else if (emailInput.validity.tooShort) {
+            emailError.textContent = `Email should be at least ${emailError.minLength} characters; you entered ${emailInput.value.length}.`;
         }
         emailError.className = "error active";
-    } else if (input === countryI) {
-        if (countryI.validity.valueMissing) {
+    } else if (input === countryInput) {
+        if (countryInput.validity.valueMissing) {
             countryError.textContent = "You need to enter a country.";
-        } else if (countryI.validity.typeMismatch) {
+        } else if (countryInput.validity.typeMismatch) {
             countryError.textContent = "Entered value needs to be an country.";
-        } else if (countryI.validity.tooShort || countryI.validity.tooLong) {
-            countryError.textContent = `Country length should be at least ${countryI.minLength} and at most ${countryI.maxLength} characters; you entered ${countryI.value.length}.`;
+        } else if (
+            countryInput.validity.tooShort ||
+            countryInput.validity.tooLong
+        ) {
+            countryError.textContent = `Country length should be at least ${countryInput.minLength} and at most ${countryInput.maxLength} characters; you entered ${countryInput.value.length}.`;
         }
         countryError.className = "error active";
-    } else if (input === zipcodeI) {
-        if (zipcodeI.validity.valueMissing) {
+    } else if (input === zipcodeInput) {
+        if (zipcodeInput.validity.valueMissing) {
             zipcodeError.textContent = "You need to enter a zipcode.";
-        } else if (zipcodeI.validity.typeMismatch) {
+        } else if (zipcodeInput.validity.typeMismatch) {
             zipcodeError.textContent = "Entered value needs to be a number.";
-        } else if (zipcodeI.validity.tooShort || zipcodeI.validity.tooLong) {
-            zipcodeError.textContent = `Zipcode length should be at least ${zipcodeI.minLength} and at most ${zipcodeI.maxLength} characters; you entered ${zipcodeI.value.length}.`;
+        } else if (
+            zipcodeInput.validity.tooShort ||
+            zipcodeInput.validity.tooLong
+        ) {
+            zipcodeError.textContent = `Zipcode length should be at least ${zipcodeInput.minLength} and at most ${zipcodeInput.maxLength} characters; you entered ${zipcodeInput.value.length}.`;
         }
         zipcodeError.className = "error active";
-    } else if (input === passwordI) {
-        if (passwordI.validity.valueMissing) {
+    } else if (input === passwordInput) {
+        if (passwordInput.validity.valueMissing) {
             passwordError.textContent = "You need to enter a password.";
-        } else if (passwordI.validity.typeMismatch) {
+        } else if (passwordInput.validity.typeMismatch) {
             passwordError.textContent = "Entered value needs to be a number.";
-        } else if (passwordI.validity.tooShort) {
-            passwordError.textContent = `Password length should be at least ${passwordI.minLength} characters; you entered ${passwordI.value.length}.`;
+        } else if (passwordInput.validity.tooShort) {
+            passwordError.textContent = `Password length should be at least ${passwordInput.minLength} characters; you entered ${passwordInput.value.length}.`;
         }
         passwordError.className = "error active";
-    } else if (input === passwordConfirmI) {
-        if (passwordConfirmI !== passwordI) {
-            passwordConfirmError.textContent = "Password doesn't match";
+    } else if (input === confirmPasswordInput) {
+        if (confirmPasswordInput !== passwordInput) {
+            confirmPasswordError.textContent = "Password doesn't match";
         }
-        passwordConfirmError.className = "error active";
+        confirmPasswordError.className = "error active";
     }
 };
